@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 // Create function newGame () {}
 function newGame() {
-	
+
 }
 
 
@@ -26,6 +26,8 @@ function newGame() {
 function randomNumber() {
 	return Math.floor((Math.random() * 100) + 1); 
 };
+
+var x = randomNumber();
 
 var userNumber = [];
 userNumber.push();
