@@ -14,13 +14,23 @@ $(document).ready(function(){
 
 });
 
-
-Game = {
-
+// Create function newGame () {}
+function newGame() {
+	
 }
 
-// Create function newGame () {}
+
 // create a function randomNumber to create a number 1-100 that is chosen for function newGame  
+// Store the number
+// Check to Make sure it persists
+function randomNumber() {
+	return Math.floor((Math.random() * 100) + 1); 
+};
+
+var userNumber = [];
+userNumber.push();
+		
+
 // newGame begins when page loads or user clicks New Game Button
 // create function userFeedback using set ranges, 1-10 = extremely hot, 11-20 = warm, 21-50 = cold, 51-100 = freezing
 // the feedback should appear in Div#feedback, replacing Make Your Guess
