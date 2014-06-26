@@ -56,7 +56,7 @@ function userGuess() {
 }
 
 function clearInput() {
-  _currentguess.reset();
+  _currentguess.value='';
 
 }
   
