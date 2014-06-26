@@ -1,3 +1,8 @@
+// Global Variables
+var _answer;
+var _currentguess;
+// var _currentguess;
+
 
 $(document).ready(function(){
 	
@@ -10,13 +15,27 @@ $(document).ready(function(){
   	/*--- Hide information modal box ---*/
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
+
+
   	});
+  newGame();
+  
+  $('#guessButton').on('click', function() {
+    userGuess();
+  });
+
+  $('#userGuess').on('keyup', function(event) {
+    if (event.keyCode==13) {
+      userGuess();
+    }
+  });
 
 });
 
 // Create function newGame () {}
 function newGame() {
-
+  _answer = randomNumber();
+  
 }
 
 
@@ -25,13 +44,23 @@ function newGame() {
 // Check to Make sure it persists
 function randomNumber() {
 	return Math.floor((Math.random() * 100) + 1); 
-};
+}
 
-var x = randomNumber();
+var guessHistory = new Array();
 
-var userNumber = [];
-userNumber.push();
-		
+function userGuess() {
+  _currentguess = document.getElementById('userGuess');
+    guessHistory.push(parseInt(_currentguess.value));
+      clearInput();
+
+}
+
+function clearInput() {
+  _currentguess.reset();
+
+}
+  
+
 
 // newGame begins when page loads or user clicks New Game Button
 // create function userFeedback using set ranges, 1-10 = extremely hot, 11-20 = warm, 21-50 = cold, 51-100 = freezing
