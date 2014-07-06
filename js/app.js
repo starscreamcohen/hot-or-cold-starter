@@ -20,16 +20,19 @@ $(document).ready(function(){
   	});
   newGame();
   
-  $('#guessButton').on('click', function() {
+  $('#guessButton').on('click', function(){
     userGuess();
+    $('#guessList').append(_currentguess);
+
   });
 
-  $('#userGuess').on('keyup', function(event) {
-    if (event.keyCode==13) {
-      userGuess();
+//delay second keyup event
+
+  $('#userGuess').keyup(function(event) {
+    if (event.keycode == 13) {
+      userGuess(); 
     }
   });
-
 });
 
 // Create function newGame () {}
@@ -51,7 +54,7 @@ var guessHistory = new Array();
 function userGuess() {
   _currentguess = document.getElementById('userGuess');
     guessHistory.push(parseInt(_currentguess.value));
-      clearInput();
+    clearInput();
 
 }
 
@@ -59,7 +62,6 @@ function clearInput() {
   _currentguess.value='';
 
 }
-  
 
 
 // newGame begins when page loads or user clicks New Game Button
