@@ -3,6 +3,8 @@ var _answer;
 var _currentguess;
 var _lastnumber;
 var _secondtolastnumber;
+var _hotorcold;
+var _guessnumber = 0;
 // var _currentguess;
 
 
@@ -21,9 +23,16 @@ $(document).ready(function(){
 
   	});
   newGame();
+
+  $('.new').on('click', function(){
+    newGame();
+  });
   
   $('#guessButton').on('click', function(){
     userGuess();
+    addToGuessList();
+    howManyGuesses();
+    userFeedback();
   });
 
 //delay second keyup event
@@ -31,6 +40,9 @@ $(document).ready(function(){
   $('#userGuess').keyup(function(event) {
     if (event.keycode == 13) {
       userGuess(); 
+      addToGuessList();
+      howManyGuesses();
+      userFeedback();
     }
   });
 });
@@ -38,7 +50,21 @@ $(document).ready(function(){
 // Create function newGame () {}
 function newGame() {
   _answer = randomNumber();
-  
+  eraseGuessList();
+  resetguessNotification();
+  resetGuessNumber();
+}
+
+function eraseGuessList() {
+  $('#guessList').children('li').remove();
+}
+
+function resetguessNotification() {
+  $('#feedback').text('').append('Make your Guess!');
+}
+
+function resetGuessNumber() {
+  $('#count').text('').append('0');
 }
 
 
@@ -82,35 +108,87 @@ function secondNumberToAnswer() {
    return _absoluteguess; 
 }
 
-function absoluteWarmOrCold() {
-  if (lastNumberToAnswer() <= 5) {
-    console.log("Hot");
+function userWarmOrCold() {
+  if (lastNumberOfArray() === _answer) {
+    return "Congrats " + _answer + " was the number"
+    newGame();
+  }
+  else if (lastNumberToAnswer() <= 5) {
+  _hotorcold = "Hot";
+   if (lastNumberToAnswer() < secondNumberToAnswer()) {
+      return _hotorcold + " And Getting Warmer"
+   }
+   else {
+      return _hotorcold + " But Getting Colder";
+   }
   }
   else if (lastNumberToAnswer() <= 15) {
-    console.log("Warm");
+   _hotorcold = "Warm";
+   if (lastNumberToAnswer() < secondNumberToAnswer()) {
+       return _hotorcold + " And Getting Warmer";
+   }
+   else {
+      return _hotorcold + " But Getting Colder";
+   }
   }
   else if (lastNumberToAnswer() <= 25) {
-    console.log("Chill");
+   _hotorcold = "Chilly";
+   if (lastNumberToAnswer() < secondNumberToAnswer()) {
+     return _hotorcold + " But Getting Warmer";
+   }
+   else {
+      return  _hotorcold + " And Getting Colder";
+   }
   }
   else if (lastNumberToAnswer() <= 50) {
-    console.log("Cold");
+    _hotorcold = "Cold";
+    if (lastNumberToAnswer() < secondNumberToAnswer()) {
+      return _hotorcold + " But Getting Warmer";
+   }
+   else {
+      return _hotorcold + " And Getting Colder";
+   }
   }
   else {
-    console.log("Freezing");
+    _hotorcold = "Freezing";
+    if (lastNumberToAnswer() < secondNumberToAnswer()) {
+      return _hotorcold + " But Getting Warmer";
+   }
+   else {
+      return _hotorcold + " And Getting Colder";
+   }
   }
 }
 
 function userWarmerOrColder() {
   if (lastNumberToAnswer() < secondNumberToAnswer()) {
-    console.log("And Getting Warmer");
+    console.log(absoluteWarmOrCold() + " And Getting Warmer");
+    return absoluteWarmOrCold() + " And Getting Warmer"
   }
   else {
-    console.log("But Getting Colder");
+    console.log(absoluteWarmOrCold() + " And Getting Colder");
+    return absoluteWarmOrCold() + " But Getting Colder"
   }
 }
 
+function userFeedback() {
+  $('#feedback').text('').append(userWarmOrCold());
+
+}
+
+function addToGuessList() {
+  $('#guessList').append('<li>' + lastNumberOfArray() + '</li>');
+}
+
+
+function howManyGuesses() {
+ $('#count').text('');
+ _guessnumber = _guessnumber + 1;
+ _stringifiednumber = String(_guessnumber);
+ $('#count').append(_stringifiednumber);
+  
+}
 // newGame begins when page loads or user clicks New Game Button
-// create function userFeedback using set ranges, 1-10 = extremely hot, 11-20 = warm, 21-50 = cold, 51-100 = freezing
 // the feedback should appear in Div#feedback, replacing Make Your Guess
 // Create function guessHistory and attach to #guessList
 // Create a regular expression for input that only allows them to guess 1-100

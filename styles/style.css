@@ -63,10 +63,14 @@ nav ul li {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 1.2em;
+	padding: 6px;
+	background-color: #50597b;
+	border-radius: 3px;
 }
 
 nav ul li:first-child {
 	float: left;
+
 }
 
 nav ul li:last-child {
@@ -259,7 +263,7 @@ input.button {
 	transition: background 1s ease-in-out;
 }
 
-input.button:hover {
+input.button:hover, nav ul li:hover {
 	background: #e64c65;
 	color: #fff;
 	-webkit-transition: background 1s ease-in-out;
