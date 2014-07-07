@@ -78,10 +78,14 @@ function randomNumber() {
 var guessHistory = new Array();
 
 function userGuess() {
-  _currentguess = document.getElementById('userGuess');
+  //if (_lastnumber.match(/^\d+$/)) {
+    _currentguess = document.getElementById('userGuess');
     guessHistory.push(parseInt(_currentguess.value));
     clearInput();
-
+  //}
+  //else {
+    //alert("We only play with numbers here");
+  //}
 }
 
 function clearInput() {
