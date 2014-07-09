@@ -24,14 +24,15 @@ $(document).ready(function(){
   	});
   newGame();
 
-  $('.new').on('click', function(){
+  $('.new').on('click', function(event){
+    event.preventDefault();
     newGame();
   });
   
-  $('#guessButton').on('click', function(){
-    userGuess();
+  $('#guessButton').on('click', function(event){
+    event.preventDefault();
+    userInputGuess();
     addToGuessList();
-    howManyGuesses();
     userFeedback();
   });
 
@@ -39,9 +40,8 @@ $(document).ready(function(){
 
   $('#userGuess').keyup(function(event) {
     if (event.keycode == 13) {
-      userGuess(); 
+      userInputGuess(); 
       addToGuessList();
-      howManyGuesses();
       userFeedback();
     }
   });
@@ -52,7 +52,6 @@ function newGame() {
   _answer = randomNumber();
   eraseGuessList();
   resetguessNotification();
-  resetGuessNumber();
 }
 
 function eraseGuessList() {
@@ -63,10 +62,6 @@ function resetguessNotification() {
   $('#feedback').text('').append('Make your Guess!');
 }
 
-function resetGuessNumber() {
-  $('#count').text('').append('0');
-}
-
 
 // create a function randomNumber to create a number 1-100 that is chosen for function newGame  
 // Store the number
@@ -75,13 +70,15 @@ function randomNumber() {
 	return Math.floor((Math.random() * 100) + 1); 
 }
 
+
 var guessHistory = new Array();
 
-function userGuess() {
+function userInputGuess() {
   //if (_lastnumber.match(/^\d+$/)) {
     _currentguess = document.getElementById('userGuess');
     guessHistory.push(parseInt(_currentguess.value));
     clearInput();
+    return true; 
   //}
   //else {
     //alert("We only play with numbers here");
@@ -117,6 +114,24 @@ function userWarmOrCold() {
     return "Congrats " + _answer + " was the number"
     newGame();
   }
+  else if (guessHistory.length === 1) {
+    if (lastNumberOfArray() <=5) {
+      return "You are hot!";
+    }
+    else if (lastNumberOfArray() <= 15) {
+      return "You are warm!";
+    }
+    else if (lastNumberOfArray() <= 25) {
+      return "You are chilly!";
+    }
+    else if (lastNumberOfArray() <= 50) {
+      return "You are cold!";
+    }
+    else {
+      return "You are freezing!";
+    }
+  }
+  
   else if (lastNumberToAnswer() <= 5) {
   _hotorcold = "Hot";
    if (lastNumberToAnswer() < secondNumberToAnswer()) {
@@ -164,17 +179,6 @@ function userWarmOrCold() {
   }
 }
 
-function userWarmerOrColder() {
-  if (lastNumberToAnswer() < secondNumberToAnswer()) {
-    console.log(absoluteWarmOrCold() + " And Getting Warmer");
-    return absoluteWarmOrCold() + " And Getting Warmer"
-  }
-  else {
-    console.log(absoluteWarmOrCold() + " And Getting Colder");
-    return absoluteWarmOrCold() + " But Getting Colder"
-  }
-}
-
 function userFeedback() {
   $('#feedback').text('').append(userWarmOrCold());
 
@@ -185,13 +189,6 @@ function addToGuessList() {
 }
 
 
-function howManyGuesses() {
- $('#count').text('');
- _guessnumber = _guessnumber + 1;
- _stringifiednumber = String(_guessnumber);
- $('#count').append(_stringifiednumber);
-  
-}
 // newGame begins when page loads or user clicks New Game Button
 // the feedback should appear in Div#feedback, replacing Make Your Guess
 // Create function guessHistory and attach to #guessList

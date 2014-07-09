@@ -29,6 +29,7 @@ body {
 	width: 98%;
 	min-height: 600px;
 	margin: 0.8em auto;
+	padding: 0 0 2em 0;
 	font-family: 'Lato', Calibri, Arial, sans-serif;
 	background-color: #1F253D;
 	text-align: center;
@@ -176,11 +177,11 @@ h1 {
 	background-color: #394264;
 	width: 380px;
 	height: 380px;
+	height: auto;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	margin: 0 auto;
-
 	box-shadow: rgb(26, 31, 52) 1px 1px,
     rgb(26, 31, 52) 2px 2px,
     rgb(26, 31, 52) 3px 3px,
@@ -302,7 +303,7 @@ input:focus {
 
 ul.guessBox {
 	min-height: 80px;
-	margin: 10px auto 0;
+	margin: 78px auto 0;
 	background: #11a8ab;
 	padding: 0.5em;
 	display: block;
