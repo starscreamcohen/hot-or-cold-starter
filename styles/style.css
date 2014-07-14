@@ -92,8 +92,8 @@ h1 {
 }
 
 /*style for hidden modal*/
-.overlay {
-	width: 100%;
+.overlay,
+.win {
 	height: 100%;
 	color: #fff;
 	background: #e74c3c;
@@ -103,6 +103,13 @@ h1 {
 	margin: 0;
 	z-index: 1000;
 	display: none;
+}
+.overlay {
+	width: 38%;
+}
+.win {
+	width: 100%;
+	overflow: hidden;
 }
 
 .content {
@@ -167,6 +174,16 @@ h1 {
 	margin-bottom: 50px;
 	border-radius: 3px;
 }
+
+.victory-image {
+	width: 700px;
+	height: 321px;
+	margin: 0 0 30px -14%;
+	background-image: url('../images/victory-fanfare.gif'); 
+	background-repeat: no-repeat;
+	background-size: 700px 321px;
+}
+
 
 /*---------------------------------------------------------------------------------
    Game Section Styles
