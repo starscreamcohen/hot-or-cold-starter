@@ -36,7 +36,7 @@ $(document).ready(function(){
   $('#guessButton').on('click', function(event){
     event.preventDefault();
     userInputGuess();
-    addToGuessList();
+    
     userFeedback();
   });
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
   $('#userGuess').keyup(function(event) {
     if (event.keycode == 13) {
       userInputGuess(); 
-      addToGuessList();
+      
       userFeedback();
     }
   });
@@ -84,10 +84,11 @@ function userInputGuess() {
     _currentguess = document.getElementById('userGuess');
     guessHistory.push(parseInt(_currentguess.value));
     clearInput();
-    return true; 
+    return addToGuessList(); 
   }
   else {
     alert("We only play with numbers here");
+    return false;
   }
 }
 
